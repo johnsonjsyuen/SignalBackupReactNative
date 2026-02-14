@@ -6,7 +6,6 @@ import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
 type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>;
-type IconSymbolName = keyof typeof MAPPING;
 
 /**
  * Add your SF Symbols to Material Icons mappings here.
@@ -14,11 +13,48 @@ type IconSymbolName = keyof typeof MAPPING;
  * - see SF Symbols in the [SF Symbols](https://developer.apple.com/sf-symbols/) app.
  */
 const MAPPING = {
+  // Navigation
   'house.fill': 'home',
-  'paperplane.fill': 'send',
-  'chevron.left.forwardslash.chevron.right': 'code',
+  'clock.fill': 'history',
+  'gearshape.fill': 'settings',
+
+  // Status indicators
+  'checkmark.circle.fill': 'check-circle',
+  'xmark.circle.fill': 'error',
+  'exclamationmark.triangle.fill': 'warning',
+  'info.circle.fill': 'info',
+
+  // Files and folders
+  'folder.fill': 'folder',
+  'folder.badge.gearshape': 'folder-open',
+
+  // Connectivity and upload
+  'wifi': 'wifi',
+  'arrow.up.circle.fill': 'cloud-upload',
+
+  // Scheduling
+  'clock': 'schedule',
+  'hourglass': 'hourglass-empty',
+
+  // User and theme
+  'person.circle.fill': 'account-circle',
+  'sun.max.fill': 'light-mode',
+  'moon.fill': 'dark-mode',
+  'circle.lefthalf.filled': 'brightness-auto',
+
+  // Actions
+  'arrow.clockwise': 'refresh',
+  'plus': 'add',
+  'arrow.left': 'arrow-back',
+  'xmark': 'close',
+
+  // Misc
   'chevron.right': 'chevron-right',
+  'chevron.left.forwardslash.chevron.right': 'code',
+  'paperplane.fill': 'send',
 } as IconMapping;
+
+type IconSymbolName = keyof typeof MAPPING;
 
 /**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.

@@ -31,13 +31,36 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
+.env.*
 .env*.local
 
 # typescript
 *.tsbuildinfo
 
-app-example
-
 # generated native folders
 /ios
 /android
+
+# dev client builds
+*.apk
+*.aab
+*.ipa
+
+# credentials / signing
+google-services.json
+GoogleService-Info.plist
+
+# editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log

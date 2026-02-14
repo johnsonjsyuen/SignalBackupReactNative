@@ -1,29 +1,50 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Colors, fonts, and typography used throughout the app.
+ * Light and dark mode palettes follow Material Design conventions.
  */
 
 import { Platform } from 'react-native';
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
 
 export const Colors = {
   light: {
     text: '#11181C',
     background: '#fff',
-    tint: tintColorLight,
+    tint: '#1A73E8',
     icon: '#687076',
     tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    tabIconSelected: '#1A73E8',
+    primary: '#1A73E8',
+    secondary: '#5F6368',
+    tertiary: '#34A853',
+    error: '#EA4335',
+    surfaceVariant: '#E8EAED',
+    primaryContainer: '#D2E3FC',
+    secondaryContainer: '#E8F0FE',
+    errorContainer: '#FCE8E6',
+    onPrimary: '#FFFFFF',
+    onError: '#FFFFFF',
+    border: '#DADCE0',
+    cardBackground: '#FFFFFF',
   },
   dark: {
     text: '#ECEDEE',
     background: '#151718',
-    tint: tintColorDark,
+    tint: '#8AB4F8',
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    tabIconSelected: '#8AB4F8',
+    primary: '#8AB4F8',
+    secondary: '#BDBDBD',
+    tertiary: '#81C995',
+    error: '#F28B82',
+    surfaceVariant: '#3C4043',
+    primaryContainer: '#174EA6',
+    secondaryContainer: '#1A3A5C',
+    errorContainer: '#601410',
+    onPrimary: '#151718',
+    onError: '#151718',
+    border: '#5F6368',
+    cardBackground: '#1E2022',
   },
 };
 
@@ -51,3 +72,11 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+export const Typography = {
+  titleLarge: { fontSize: 22, fontWeight: '600' as const, lineHeight: 28 },
+  titleMedium: { fontSize: 16, fontWeight: '500' as const, lineHeight: 24 },
+  bodyLarge: { fontSize: 16, fontWeight: '400' as const, lineHeight: 24 },
+  bodyMedium: { fontSize: 14, fontWeight: '400' as const, lineHeight: 20 },
+  labelSmall: { fontSize: 11, fontWeight: '500' as const, lineHeight: 16 },
+};
