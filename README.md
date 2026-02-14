@@ -19,9 +19,39 @@ A React Native (Expo) app that automatically backs up Signal Messenger `.backup`
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (LTS recommended)
-- Android SDK with `ANDROID_HOME` environment variable set (for Android builds)
 - Xcode (for iOS builds, macOS only)
-- JDK 17+ (for Android builds)
+
+### Android SDK
+
+Add to your shell profile (`~/.zshrc`):
+
+```bash
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+```
+
+Or create `android/local.properties`:
+
+```properties
+sdk.dir=/Users/<your-username>/Library/Android/sdk
+```
+
+### JDK 17 (Android builds)
+
+Android builds require **JDK 17** (Temurin recommended). GraalVM JDKs will cause `jlink` failures during compilation.
+
+Using [SDKMAN](https://sdkman.io/):
+
+```bash
+sdk install java 17.0.13-tem
+sdk default java 17.0.13-tem
+```
+
+If switching from a different JDK, clear the Gradle transform cache:
+
+```bash
+rm -rf ~/.gradle/caches/*/transforms
+```
 
 ## Getting Started
 

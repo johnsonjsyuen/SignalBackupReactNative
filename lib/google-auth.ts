@@ -7,6 +7,8 @@ function ensureConfigured(): void {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive'],
       offlineAccess: true,
+      webClientId:
+        '708439544712-6gt7qbs1jq1domqp2tgrengkj9d5c8pg.apps.googleusercontent.com',
     });
     isConfigured = true;
   }
