@@ -79,6 +79,21 @@ The APK will be at `android/app/build/outputs/apk/debug/app-debug.apk`. Install 
 adb install android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
+### Release build (APK)
+
+Generate a signed release APK:
+
+```bash
+npx expo prebuild --platform android
+cd android && ./gradlew assembleRelease
+```
+
+The APK will be at `android/app/build/outputs/apk/release/app-release.apk`. Install it:
+
+```bash
+adb install android/app/build/outputs/apk/release/app-release.apk
+```
+
 ### One-step build and run
 
 Build and install directly to a connected device or emulator:
