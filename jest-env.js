@@ -28,4 +28,16 @@ module.exports = class CustomEnv extends ReactNativeEnv {
       });
     }
   }
+
+  async setup() {
+    // Suppress "Failed to set polyfill" warnings from expo's installGlobal.ts
+    // that fire during jest-expo setup (before setupFilesAfterEnv runs).
+    const origError = console.error;
+    console.error = (...args) => {
+      if (typeof args[0] === 'string' && args[0].includes('Failed to set polyfill')) return;
+      origError.apply(console, args);
+    };
+    await super.setup();
+    console.error = origError;
+  }
 };

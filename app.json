@@ -77,7 +77,8 @@
       [
         "@react-native-google-signin/google-signin",
         {
-          "scopes": ["https://www.googleapis.com/auth/drive"]
+          "scopes": ["https://www.googleapis.com/auth/drive"],
+          "iosUrlScheme": "com.googleusercontent.apps.708439544712-6r5cs400k552cmit3c8rkn35s7io2het"
         }
       ]
     ],
