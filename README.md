@@ -1,50 +1,136 @@
-# Welcome to your Expo app 👋
+# Signal Backup
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native (Expo) app that automatically backs up Signal Messenger `.backup` files to Google Drive on a daily schedule, with manual upload support.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Automated daily backups** - Schedule uploads at a chosen time (default 3:00 AM)
+- **Google Drive integration** - Sign in with Google and pick a target Drive folder
+- **Resumable uploads** - Chunked uploads that survive app kills, reboots, and network loss
+- **Upload history** - Track past uploads with status, file size, and timestamps
+- **Background processing** - Uploads continue via foreground service with progress notification
+- **Duplicate detection** - Skips re-uploading identical backups already on Drive
+- **Wi-Fi only mode** - Optionally restrict uploads to Wi-Fi connections
+- **Theming** - Light, dark, and system-default themes
+- **Local folder picker** - Select your Signal backup folder via system file picker
+- **Drive folder browser** - Browse and create folders in Google Drive from within the app
+- **Retry logic** - Automatic retries with exponential backoff; 30-minute delayed retry after final failure
 
-   ```bash
-   npm install
-   ```
+## Prerequisites
 
-2. Start the app
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- Android SDK with `ANDROID_HOME` environment variable set (for Android builds)
+- Xcode (for iOS builds, macOS only)
+- JDK 17+ (for Android builds)
 
-   ```bash
-   npx expo start
-   ```
+## Getting Started
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Install dependencies:
 
 ```bash
-npm run reset-project
+cd SignalBackup
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Building for Android
 
-## Learn more
+### Development build (APK)
 
-To learn more about developing your project with Expo, look at the following resources:
+Generate the native Android project and build a debug APK:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo prebuild --platform android
+cd android && ./gradlew assembleDebug
+```
 
-## Join the community
+The APK will be at `android/app/build/outputs/apk/debug/app-debug.apk`. Install it on a device or emulator:
 
-Join our community of developers creating universal apps.
+```bash
+adb install android/app/build/outputs/apk/debug/app-debug.apk
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### One-step build and run
+
+Build and install directly to a connected device or emulator:
+
+```bash
+npx expo run:android
+```
+
+### EAS Build (cloud)
+
+For cloud-based builds via Expo Application Services:
+
+```bash
+npm install -g eas-cli
+eas login
+eas build --platform android --profile preview
+```
+
+This requires an `eas.json` with an APK profile:
+
+```json
+{
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    }
+  }
+}
+```
+
+## Building for iOS
+
+### Simulator build
+
+Generate the native iOS project and run on the iOS Simulator (macOS only):
+
+```bash
+npx expo run:ios
+```
+
+### Device build
+
+To run on a physical iOS device, you need an Apple Developer account and provisioning profile:
+
+```bash
+npx expo run:ios --device
+```
+
+### EAS Build (cloud)
+
+```bash
+eas build --platform ios --profile development
+```
+
+For TestFlight / App Store distribution:
+
+```bash
+eas build --platform ios --profile production
+eas submit --platform ios
+```
+
+## Using Expo Go
+
+For quick iteration without native builds, start the Expo development server:
+
+```bash
+npx expo start
+```
+
+Then scan the QR code with the [Expo Go](https://expo.dev/go) app on your device. Note that Expo Go has limitations - features requiring native modules (like Google Sign-In and background tasks) will not work. Use a development build for full functionality.
+
+## Project Structure
+
+```
+app/
+  (tabs)/
+    _layout.tsx        # Tab navigation layout
+    index.tsx          # Home screen (status, upload controls)
+    history.tsx        # Upload history list
+    settings.tsx       # Configuration & preferences
+  drive-folder-picker.tsx  # Google Drive folder browser
+  theme-picker.tsx         # Theme selection
+```
